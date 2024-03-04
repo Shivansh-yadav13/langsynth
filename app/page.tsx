@@ -1,113 +1,117 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Playfair_Display } from "next/font/google";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+
+const pfd = Playfair_Display({ subsets: ["latin"], style: ["italic"] });
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="flex min-h-screen flex-col items-center gap-10 p-24 select-none">
+      <svg
+        className="absolute inset-0 -top-24 -z-10 h-full w-full stroke-gray-500 [mask-image:radial-gradient(80%_40%_at_center,white,transparent)]"
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern
+            id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
+            width="200"
+            height="200"
+            x="50%"
+            y="-1"
+            patternUnits="userSpaceOnUse"
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            <path d="M.5 200V.5H200" fill="none"></path>
+          </pattern>
+        </defs>
+        <rect
+          width="100%"
+          height="100%"
+          strokeWidth="0"
+          fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
+        ></rect>
+      </svg>
+      <div className="flex flex-col gap-4 text-6xl text-center font-bold">
+        <h1>Build High Quality LLMs using</h1>
+        <h1 className="text-prime">Synthetic Data</h1>
+      </div>
+      <p className='text-wrap w-2/4 text-zinc-400 text-center'>Supercharge your LLMs with diverse and bias-minimized synthetic data, unlocking their full potential for accurate and fair AI language processing</p>
+
+      <div className="flex flex-col gap-3 justify-center">
+        <Button>Get Started</Button>
+        {/* <Badge variant="outline">No Credit Card Required</Badge> */}
+        <Badge variant="outline" className="mx-auto">{`It's Free`}</Badge>
+        <p className="text-xs italic text-zinc-400 my-2 font-bold"></p>
+      </div>
+
+      <div className="flex flex-col">
+        <div className="flex flex-col w-full">
+          <Image
+            src="/images/data.png"
+            alt="data"
+            width={80}
+            height={80}
+          />
+          <div>
+            <h2 className="font-bold text-3xl">SOTA High-Quality Synthetic Data</h2>
+            <p className="text-zinc-400 w-1/2">{`LangSynth leverage state-of-the-art (SOTA) models to ensure the highest quality synthetic data, specifically designed for LLM training.`}</p>
+          </div>
         </div>
+
+        <div className="flex flex-col w-full">
+          <Image
+            className="ml-auto"
+            src="/images/speed.png"
+            alt="data"
+            width={80}
+            height={80}
+          />
+          <div className="text-right">
+            <h2 className="font-bold text-3xl">GodSpeed Synthetic Data Generation</h2>
+            <p className="text-zinc-400 w-1/2 ml-auto">{`Experience unparalleled speed with the industry-leading synthetic data generation engine. Get the data you need, faster than ever before.`}</p>
+          </div>
+        </div>
+
+        {/* <div className="flex flex-col w-full">
+          <Image
+            src="/images/cost.png"
+            alt="data"
+            width={80}
+            height={80}
+          />
+          <div>
+            <h2 className="font-bold text-3xl">Cost-Effective Synthetic Data</h2>
+            <p className="text-zinc-400 w-1/2">{`Slash your development costs compared to real-world data acquisition and curation. Our efficient synthetic data generation process saves you time and money, allowing you to focus on building innovative LLMs.`}</p>
+          </div>
+        </div> */}
       </div>
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="flex flex-col gap-2">
+        <h2 className="text-5xl font-bold mt-20">Get Started for <span className="text-prime">Free</span></h2>
+        <p className="text-zinc-400 text-center">Experince the power of Synthetic Data for Absolutely Free</p>
+      </div>
+      <div className="flex flex-col gap-3 justify-center">
+        <Button>Get Started</Button>
+        <Badge variant="outline" className="mx-auto">{`It's Free`}</Badge>
+        {/* <Badge variant="outline">No Credit Card Required</Badge> */}
+        <p className="text-xs italic text-zinc-400 my-2 font-bold"></p>
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      {/* <h3 className="mr-auto text-3xl font-bold">Frequently Asked Questions</h3>
+      <Accordion type="single" collapsible className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionContent>
+            Yes. It adheres to the WAI-ARIA design pattern.
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion> */}
     </main>
   );
 }
