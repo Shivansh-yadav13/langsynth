@@ -78,6 +78,21 @@ export default function Home() {
           </div>
         </div>
 
+        <div className="mt-10 flex flex-col gap-2">
+          <h2 className="font-bold text-4xl">Why Synthetic Data?</h2>
+          <p className="text-zinc-400">{`
+            Synthetic Data is important because it can help to train the model on a wide range of topics and styles of language. This can result in more versatile and creative language generation, as the model is not limited by the specific data it has been trained on. Synthetic data can also help to identify and correct errors in the model's output, as it can generate data that is similar to real-world data but with known errors or inaccuracies.
+          `}</p>
+          <p className="font-bold text-lg">{`Elon Musk & Jim Fan from NVIDIA has also shared about the importance of Synthetic Data.`}</p>
+          <Image 
+            className="mx-auto mt-5 border-2 border-prime rounded-xl"
+            src="/images/tweet.png"
+            alt="tweet"
+            width={500}
+            height={500}
+          />
+        </div>
+
         {/* <div className="flex flex-col w-full">
           <Image
             src="/images/cost.png"
@@ -93,7 +108,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col gap-2">
-        <h2 className="text-5xl font-bold mt-20">Get Started for <span className="text-prime">Free</span></h2>
+        <h2 className="text-5xl font-bold mt-10">Get Started for <span className="text-prime">Free</span></h2>
         <p className="text-zinc-400 text-center">Experince the power of Synthetic Data for Absolutely Free</p>
       </div>
       <div className="flex flex-col gap-3 justify-center">
