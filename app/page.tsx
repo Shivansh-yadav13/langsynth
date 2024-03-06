@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { createClient } from "@/utils/supabase/server"; 
 import { Playfair_Display } from "next/font/google";
 import {
   Accordion,
@@ -8,10 +9,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
+import DeployButton from "@/components/supabase/DeployButton";
+import AuthButton from "@/components/supabase/AuthButton";
+import SignUpUserSteps from "@/components/supabase/SignUpUserSteps";
+import ConnectSupabaseSteps from "@/components/supabase/ConnectSupabaseSteps";
 
 const pfd = Playfair_Display({ subsets: ["latin"], style: ["italic"] });
 
 export default function Home() {
+
+  const canInitSupabaseClient = () => {
+    try {
+      createClient();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  const isSupabaseConnected = canInitSupabaseClient();
+
+
+
   return (
     <main className="flex min-h-screen flex-col items-center gap-10 p-24 select-none">
       <svg
@@ -37,6 +56,9 @@ export default function Home() {
           fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
         ></rect>
       </svg>
+      <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
+          {isSupabaseConnected && <AuthButton />}
+        </div>
       <div className="flex flex-col gap-4 text-6xl text-center font-bold">
         <h1>Build High Quality LLMs using</h1>
         <h1 className="text-prime">Synthetic Data</h1>
