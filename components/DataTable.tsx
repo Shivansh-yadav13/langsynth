@@ -8,6 +8,8 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import { Download } from "lucide-react";
+
 import { ScrollArea } from "@/components/ui/scroll-area"
 
 import {
@@ -44,6 +46,19 @@ export default function DataTable<TData, TValue>({
       }
     }
   })
+
+  const handleExportData = async () => {
+    console.log(data);
+    const jsonlData = data.map(obj => JSON.stringify(obj)).join('\n');
+    const blob = new Blob([jsonlData], { type: 'application/json' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'data.jsonl');
+    document.body.appendChild(link);
+    link.click();
+    link.parentNode?.removeChild(link);
+  }
 
   return (
     <>
@@ -94,12 +109,25 @@ export default function DataTable<TData, TValue>({
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
+        {
+          data &&
+          <Button
+            className="flex gap-2"
+            variant="outline"
+            size="sm"
+            onClick={handleExportData}
+          >
+            <Download size={15} />
+            Export JSONL
+          </Button>
+        }
+
         <Button
           variant="outline"
           size="sm"
           onClick={() => {
             table.previousPage()
-            if (dataPageIndex > 0) setDataPageIndex(dataPageIndex-1);
+            if (dataPageIndex > 0) setDataPageIndex(dataPageIndex - 1);
           }}
           disabled={!table.getCanPreviousPage()}
         >
@@ -110,7 +138,7 @@ export default function DataTable<TData, TValue>({
           size="sm"
           onClick={() => {
             table.nextPage()
-            setDataPageIndex(dataPageIndex+1);
+            setDataPageIndex(dataPageIndex + 1);
           }}
           disabled={!table.getCanNextPage()}
         >
