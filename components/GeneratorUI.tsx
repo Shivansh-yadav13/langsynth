@@ -11,6 +11,7 @@ import {
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
 import { Gauge } from "lucide-react";
+import { Button } from "./ui/button";
 
 
 export const GeneratorUI = (
@@ -31,12 +32,11 @@ export const GeneratorUI = (
     genForm_setRowCount: Dispatch<number>,
     genForm_setModel: Dispatch<string>,
   }) => {
-    const [loading, setLoading] = useState<boolean>(false);
-  
+  const [loading, setLoading] = useState<boolean>(false);
+
 
   const submitGenForm = async () => {
     await genSynthDataCaller();
-    setLoading(false);
   }
 
   const columns: ColumnDef<any>[] = [
@@ -71,6 +71,10 @@ export const GeneratorUI = (
               setRowCount={genForm_setRowCount}
               setModel={genForm_setModel}
             />
+            <Button variant="default" disabled={loading} onClick={() => {
+              setLoading(true);
+              submitGenForm();
+            }} className="bg-prime mt-5 w-full hover:bg-purple-950">{loading ? 'Generating...' : 'Generate'}</Button>
           </ResizablePanel>
           <ResizableHandle withHandle />
           <ResizablePanel minSize={35}>

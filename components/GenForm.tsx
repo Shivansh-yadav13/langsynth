@@ -14,7 +14,7 @@ import {
 import { object, z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Button } from "@/components/ui/button"
-import { Dispatch } from "react"
+import { Dispatch, useState } from "react"
 import {
   HoverCard,
   HoverCardContent,
@@ -105,6 +105,7 @@ export const GenForm = ({
   loading: boolean,
   setLoading: Dispatch<boolean>,
 }) => {
+  const [buttonState, setButtonState] = useState<boolean>(loading || false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
   });
@@ -218,10 +219,6 @@ export const GenForm = ({
           </FormItem>
         )}
       />
-      <Button variant="default" disabled={loading} onClick={() => {
-        setLoading(true);
-        submitTrigger();
-      }} className="bg-prime hover:bg-purple-950">Generate</Button>
     </div>
   )
 }

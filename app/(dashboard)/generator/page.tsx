@@ -22,7 +22,7 @@ const initModel = () => {
     const model = new ChatGroq({
         temperature: 0,
         modelName: "mixtral-8x7b-32768", // llama2-70b-4096 //mixtral-8x7b-32768 // Gemma-7b-it
-        apiKey: "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",
+        apiKey: "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", // crizp: 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, main: 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
     });
     return model;
 }
@@ -51,6 +51,7 @@ export default function App() {
     })
 
     const generateSynthData = async () => {
+        console.log("Running Generator ⚙️");
         if (sampleData) {
             //@ts-ignore
             const col1 = sampleData[0].system;
@@ -99,7 +100,7 @@ export default function App() {
                     The data you generate should be parsable with JSON.parse method.
                     Don't use double qoutes in text, only use single qoutes or back ticks.
                     Don't use any qoutes for square brackets.
-                    Don't add empty lines in the response.
+                    Don't add empty lines between the lists in the parent list.
                     and keep in mind the subject/topic of synthetic data to generate: {subject}.
                     `,
                     //@ts-ignore
