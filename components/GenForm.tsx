@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form"
 import { FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
+import { toast } from "sonner"
 import {
   Select,
   SelectContent,
@@ -42,13 +42,13 @@ const FormSchema = z.object({
 
 const validateObjectStructure = (obj: object) => {
   //@ts-ignore
-  // Check if 'data' key exists and it's an array
-  if (!obj.hasOwnProperty('data') || !Array.isArray(obj.data)) {
+  // Check if 'messages' key exists and it's an array
+  if (!obj.hasOwnProperty('messages') || !Array.isArray(obj.messages)) {
      return false;
   }
   //@ts-ignore
-  // Check each item in the 'data' array
-  for (const item of obj.data) {
+  // Check each item in the 'messages' array
+  for (const item of obj.messages) {
      // Check if 'role' and 'content' keys exist and are of type string
      if (!item.hasOwnProperty('role') || typeof item.role !== 'string' ||
          !item.hasOwnProperty('content') || typeof item.content !== 'string') {
@@ -72,7 +72,7 @@ const prepareObjForTemplate = (obj: object) => {
     assistant: ""
   }
   //@ts-ignore
-  const objlist = obj.data;
+  const objlist = obj.messages;
   for (const item of objlist) {
     if (item.role === "system") {
       resultObj.system = item.content;
@@ -92,7 +92,9 @@ export const GenForm = ({
   setExtra,
   setSampleData,
   setRowCount,
-  setModel
+  setModel,
+  loading,
+  setLoading
 }: {
   submitTrigger: () => void,
   setSubject: Dispatch<string>,
@@ -100,6 +102,8 @@ export const GenForm = ({
   setSampleData: Dispatch<object[]>,
   setRowCount: Dispatch<number>,
   setModel: Dispatch<string>,
+  loading: boolean,
+  setLoading: Dispatch<boolean>,
 }) => {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema)
@@ -108,24 +112,23 @@ export const GenForm = ({
   const onSampleDataUpload = async (e: any) => {
     const file: File = e.target.files[0];
     const fileContent = await file.text();
-    console.log(fileContent);
     const lines = fileContent.split('\n');
     const jsonLines = lines.filter(line => line.trim() !== '');
     const jsonContent = jsonLines.map(line => JSON.parse(line));
-
+    
     let finalSampleData: object[] = [];
 
     // run while loop
     jsonContent.forEach(obj => {
       if (validateObjectStructure(obj)) {
-        console.log('Validation succeeded for:', obj);
         const resultObj = prepareObjForTemplate(obj);
         finalSampleData.push(resultObj);
       } else {
-        console.log('Validation failed for:', obj);
+        toast("Failed to parse the uploaded data", {
+          description: "Make sure the data is in the correct format.",
+        });
       }
    });
-    console.log(finalSampleData);
     setSampleData(finalSampleData);
   }
 
@@ -153,11 +156,11 @@ export const GenForm = ({
         name="rows"
         render={({ field }) => (
           <FormItem>
-            <Label htmlFor="rows">{`Number of Rows: ${form.getValues("rows")}`}</Label>
-            <Slider id="rows" defaultValue={[5]} max={30} min={5} step={1} onValueChange={(values) => {
+            <Label htmlFor="rows">{`Number of Rows: 10`}</Label>
+            {/* <Slider id="rows" defaultValue={[10]} max={10} min={10} step={10} onValueChange={(values) => {
               form.setValue("rows", values[0]);
               setRowCount(values[0]);
-            }} />
+            }} /> */}
           </FormItem>
         )}
       />
@@ -166,13 +169,11 @@ export const GenForm = ({
         name="topic"
         render={({ field }) => (
           <FormItem>
-            <Label htmlFor="genform-topic">{`What's the data about?`}</Label>
-            <Textarea id="genform-topic" placeholder="Explain the topic of the data." onChange={(e) => {
-              // form.setValue("topic", e.target.value);
-              // console.log(form.getValues("topic"));
+            <Label htmlFor="genform-topic">{`Topic of the data:`}</Label>
+            <Input id="genform-topic" maxLength={72} placeholder="Explain about the data..." onChange={(e) => {
               setSubject(e.target.value);
               }} />
-            <p className="text-sm text-muted-foreground">This will be used to instruct the model accordingly.</p>
+              <p className="text-xs text-muted-foreground">only 72 characters</p>
           </FormItem>
         )}
       />
@@ -181,12 +182,11 @@ export const GenForm = ({
         name="extra_prompt"
         render={({ field }) => (
           <FormItem>
-            <Label htmlFor="genform-topic">{`Additional Instruction`}</Label>
-            <Textarea id="genform-topic" placeholder="Add any addition information for the model." onChange={(e) => {
-              // form.setValue("extra_prompt", e.target.value);
-              // console.log(form.getValues("extra_prompt"));
+            <Label htmlFor="genform-topic">{`Additional Info`}</Label>
+            <Input id="genform-topic" maxLength={52} placeholder="Add any addition info..." onChange={(e) => {
               setExtra(e.target.value);
               }} />
+              <p className="text-xs text-muted-foreground">only 52 characters</p>
           </FormItem>
         )}
       />
@@ -203,7 +203,7 @@ export const GenForm = ({
                   <h4 className="font-sans font-bold text-lg">Format for data</h4>
                   <p>{`[`}</p>
                   <p className="ml-2">{`{`}</p>
-                  <p className="ml-4">{`"data": [`}</p>
+                  <p className="ml-4">{`"messages": [`}</p>
                   <p className="ml-6">{`{"role": "system", "content": "..."},`}</p>
                   <p className="ml-6">{`{"role": "user", "content": "..."},`}</p>
                   <p className="ml-6">{`{"role": "assistant", "content": "..."},`}</p>
@@ -218,12 +218,10 @@ export const GenForm = ({
           </FormItem>
         )}
       />
-      <Button onClick={() => {
-        // setExtra(form.getValues("extra_prompt"));
-        // setSubject(form.getValues("topic"));
-        // setRowCount(form.getValues("rows"));
+      <Button variant="default" disabled={loading} onClick={() => {
+        setLoading(true);
         submitTrigger();
-      }} className="bg-prime text-black">Generate Synthetic Data</Button>
+      }} className="bg-prime hover:bg-purple-950">Generate</Button>
     </div>
   )
 }

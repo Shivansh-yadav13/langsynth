@@ -10,11 +10,12 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable"
-import WrapperNav from "@/app/(dashboard)/components/WrapperNav";
+import { Gauge } from "lucide-react";
 
 
 export const GeneratorUI = (
   {
+    resultData,
     genSynthDataCaller,
     genForm_setSubject,
     genForm_setExtra,
@@ -22,6 +23,7 @@ export const GeneratorUI = (
     genForm_setRowCount,
     genForm_setModel
   }: {
+    resultData: any[]
     genSynthDataCaller: () => Promise<ChainValues | null>,
     genForm_setSubject: Dispatch<string>,
     genForm_setExtra: Dispatch<string>,
@@ -29,20 +31,12 @@ export const GeneratorUI = (
     genForm_setRowCount: Dispatch<number>,
     genForm_setModel: Dispatch<string>,
   }) => {
-  const [resultData, setResultData] = useState<any[]>([
-    {
-      user: "Sample",
-      system: "Sample",
-      assistant: "Sample",
-    }
-  ]);
+    const [loading, setLoading] = useState<boolean>(false);
+  
 
   const submitGenForm = async () => {
-    console.log("Running Generate Synthetic Data")
-    const synthData = await genSynthDataCaller();
-    if (synthData) {
-      setResultData(synthData.text)
-    }
+    await genSynthDataCaller();
+    setLoading(false);
   }
 
   const columns: ColumnDef<any>[] = [
@@ -61,13 +55,15 @@ export const GeneratorUI = (
   ]
 
   return (
-    <div className="w-full flex flex-col p-2">
-      <h1 className="font-bold text-5xl mt-5">Synthetic Data Generator</h1>
+    <div className="w-full flex flex-col p-2 mt-10">
+      <h1 className="font-bold text-5xl mt-5 text-center gap-4">Synthetic Data Generator ⚙️</h1>
       <div className="w-full mt-20">
         <ResizablePanelGroup className="flex gap-10 h-0" direction="horizontal">
-          <ResizablePanel minSize={20}>
-            <h2 className="font-bold text-3xl">Configuration</h2>
+          <ResizablePanel minSize={20} defaultSize={10}>
+            <h2 className="text-3xl">Configuration</h2>
             <GenForm
+              loading={loading}
+              setLoading={setLoading}
               submitTrigger={submitGenForm}
               setExtra={genForm_setExtra}
               setSubject={genForm_setSubject}

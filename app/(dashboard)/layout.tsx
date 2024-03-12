@@ -1,29 +1,32 @@
 import type { Metadata } from "next";
-
-import { Manrope } from "next/font/google";
+import { Inter } from "next/font/google";
 import "@/app/globals.css";
-import WrapperNav from "./components/WrapperNav";
-const manrope = Manrope({ subsets: ["latin"] });
+import Navbar from "@/components/common/Navbar";
+import { AuthContextProvider } from "@/app/contexts/authContext";
+import { Toaster } from "@/components/ui/sonner"
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Generate Synthetic Data",
-  description: "LangSynth Free Synthetic data generator for LLMs.",
+  title: "LangSynth",
+  description: "High Quality Synthetic Data for LLMs",
 };
 
-export default function GeneratorLayout({
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
-      <body className={manrope.className}>
+      <body className={inter.className}>
         <main>
-          <div className="w-full dark flex">
-            <WrapperNav />
-            <div className="w-full mx-5">
+          <div className="mx-72">
+            <AuthContextProvider>
+              <Navbar />
               {children}
-            </div>
+              <Toaster />
+            </AuthContextProvider>
           </div>
         </main>
       </body>

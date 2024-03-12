@@ -48,8 +48,8 @@ export default function DataTable<TData, TValue>({
   })
 
   const handleExportData = async () => {
-    console.log(data);
-    const jsonlData = data.map(obj => JSON.stringify(obj)).join('\n');
+    //@ts-ignore
+    const jsonlData = data.map(obj => JSON.stringify({"messages": [{"role": "system", "content": obj.system}, {"role": "user", "content": obj.user}, {"role": "assistant", "content": obj.assistant}]})).join('\n');
     const blob = new Blob([jsonlData], { type: 'application/json' });
     const url = window.URL.createObjectURL(blob);
     const link = document.createElement('a');

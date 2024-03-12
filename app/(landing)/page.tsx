@@ -1,39 +1,15 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { createClient } from "@/utils/supabase/server"; 
 import { Playfair_Display } from "next/font/google";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
-import DeployButton from "@/components/supabase/DeployButton";
-import AuthButton from "@/components/supabase/AuthButton";
-import SignUpUserSteps from "@/components/supabase/SignUpUserSteps";
-import ConnectSupabaseSteps from "@/components/supabase/ConnectSupabaseSteps";
+import Link from "next/link";
 
 const pfd = Playfair_Display({ subsets: ["latin"], style: ["italic"] });
 
 export default function Home() {
-
-  const canInitSupabaseClient = () => {
-    try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  const isSupabaseConnected = canInitSupabaseClient();
-
-
-
   return (
-    <main className="flex min-h-screen flex-col items-center gap-10 p-24 select-none">
-      <svg
+    <div className="flex min-h-screen flex-col gap-10 mt-32">
+      {/* <svg
         className="absolute inset-0 -top-24 -z-10 h-full w-full stroke-gray-500 [mask-image:radial-gradient(80%_40%_at_center,white,transparent)]"
         aria-hidden="true"
       >
@@ -55,25 +31,49 @@ export default function Home() {
           strokeWidth="0"
           fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
         ></rect>
-      </svg>
-      <div className="w-full max-w-4xl flex justify-between items-center p-3 text-sm">
-          {isSupabaseConnected && <AuthButton />}
-        </div>
-      <div className="flex flex-col gap-4 text-6xl text-center font-bold">
-        <h1>Build High Quality LLMs using</h1>
-        <h1 className="text-prime">Synthetic Data</h1>
+      </svg> */}
+      <div className="flex flex-col gap-4 text-6xl text-left font-bold">
+        <h1>Generate High Quality</h1>
+        <h1><span className="text-prime">Synthetic</span> Data</h1>
       </div>
-      <p className='text-wrap w-2/4 text-zinc-400 text-center'>Supercharge your LLMs with diverse and bias-minimized synthetic data, unlocking their full potential for accurate and fair AI language processing</p>
+      <p className='text-wrap w-2/4 text-zinc-400'>Supercharge your LLMs with diverse and bias-minimized synthetic data, unlocking their full potential for accurate and fair AI language processing</p>
 
       <div className="flex flex-col gap-3 justify-center">
-        <Button>Get Started</Button>
-        {/* <Badge variant="outline">No Credit Card Required</Badge> */}
-        <Badge variant="outline" className="mx-auto">{`It's Free`}</Badge>
+        <Link href="/generator" className="w-fit">
+          <Button className="bg-prime hover:bg-purple-950">
+            Get Started
+          </Button>
+        </Link>
+        <Badge variant="outline" className="w-fit">{`It's Free`}</Badge>
         <p className="text-xs italic text-zinc-400 my-2 font-bold"></p>
       </div>
 
       <div className="flex flex-col">
-        <div className="flex flex-col w-full">
+        <div>
+          <h2 className="text-xl text-muted-foreground text-center font-bold">Powered By</h2>
+          <div className="flex justify-evenly my-10">
+            <Image
+              src="/images/langchain.svg"
+              width={300}
+              height={100}
+              alt="langchain"
+            />
+            <Image
+              src="/images/groq.png"
+              width={200}
+              height={100}
+              alt="groq"
+            />
+            <Image
+              src="/images/mistral.svg"
+              width={200}
+              height={100}
+              alt="mistral"
+            />
+          </div>
+        </div>
+
+        {/* <div className="flex flex-col w-full">
           <Image
             src="/images/data.png"
             alt="data"
@@ -98,16 +98,18 @@ export default function Home() {
             <h2 className="font-bold text-3xl">GodSpeed Synthetic Data Generation</h2>
             <p className="text-zinc-400 w-1/2 ml-auto">{`Experience unparalleled speed with the industry-leading synthetic data generation engine. Get the data you need, faster than ever before.`}</p>
           </div>
-        </div>
+        </div> */}
 
-        <div className="mt-10 flex flex-col gap-2">
-          <h2 className="font-bold text-4xl">Why Synthetic Data?</h2>
-          <p className="text-zinc-400">{`
+        <div className="mt-32 flex justify-between gap-2">
+          <div className="flex flex-col gap-5">
+            <h2 className="font-bold text-4xl">Why Synthetic Data?</h2>
+            <p className="text-zinc-400 text-xl">{`
             Synthetic Data is important because it can help to train the model on a wide range of topics and styles of language. This can result in more versatile and creative language generation, as the model is not limited by the specific data it has been trained on. Synthetic data can also help to identify and correct errors in the model's output, as it can generate data that is similar to real-world data but with known errors or inaccuracies.
           `}</p>
-          <p className="font-bold text-lg">{`Elon Musk & Jim Fan from NVIDIA has also shared about the importance of Synthetic Data.`}</p>
-          <Image 
-            className="mx-auto mt-5 border-2 border-prime rounded-xl"
+            <p className="font-bold text-lg">{`Elon Musk & Jim Fan from NVIDIA has also shared about the importance of Synthetic Data.`}</p>
+          </div>
+          <Image
+            className="mx-auto mt-5 rounded-xl"
             src="/images/tweet.png"
             alt="tweet"
             width={500}
@@ -129,26 +131,19 @@ export default function Home() {
         </div> */}
       </div>
 
-      <div className="flex flex-col gap-2">
-        <h2 className="text-5xl font-bold mt-10">Get Started for <span className="text-prime">Free</span></h2>
+      <div className="flex flex-col gap-2 text-center mt-32">
+        <h2 className="text-5xl font-bold mt-10">Get Started for Free</h2>
         <p className="text-zinc-400 text-center">Experince the power of Synthetic Data for Absolutely Free</p>
       </div>
-      <div className="flex flex-col gap-3 justify-center">
-        <Button>Get Started</Button>
+      <div className="flex flex-col gap-3 mx-auto">
+        <Link href="/generator">
+          <Button className="bg-prime hover:bg-purple-950">
+            Get Started
+          </Button>
+        </Link>
         <Badge variant="outline" className="mx-auto">{`It's Free`}</Badge>
-        {/* <Badge variant="outline">No Credit Card Required</Badge> */}
         <p className="text-xs italic text-zinc-400 my-2 font-bold"></p>
       </div>
-
-      {/* <h3 className="mr-auto text-3xl font-bold">Frequently Asked Questions</h3>
-      <Accordion type="single" collapsible className="w-full">
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Is it accessible?</AccordionTrigger>
-          <AccordionContent>
-            Yes. It adheres to the WAI-ARIA design pattern.
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion> */}
-    </main>
+    </div>
   );
 }
