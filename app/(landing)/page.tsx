@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
+import DemoVideo from "@/components/DemoVideo";
 
 const pfd = Playfair_Display({ subsets: ["latin"], style: ["italic"] });
 
@@ -32,20 +33,28 @@ export default function Home() {
           fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
         ></rect>
       </svg> */}
-      <div className="flex flex-col gap-4 text-6xl text-left font-bold">
-        <h1>Generate High Quality</h1>
-        <h1><span className="text-prime">Synthetic</span> Data</h1>
-      </div>
-      <p className='text-wrap w-2/4 text-zinc-400'>Supercharge your LLMs with diverse and bias-minimized synthetic data, unlocking their full potential for accurate and fair AI language processing</p>
+      <div className="flex justify-between items-center">
+        <div className="w-full flex flex-col gap-5">
+          <div className="flex flex-col gap-4 text-6xl text-left font-bold">
+            <h1>Generate High Quality</h1>
+            <h1><span className="text-prime">Synthetic</span> Data</h1>
 
-      <div className="flex flex-col gap-3 justify-center">
-        <Link href="/generator" className="w-fit">
-          <Button className="bg-prime hover:bg-purple-950">
-            Get Started
-          </Button>
-        </Link>
-        <Badge variant="outline" className="w-fit">{`It's Free`}</Badge>
-        <p className="text-xs italic text-zinc-400 my-2 font-bold"></p>
+          </div>
+          <p className='text-wrap w-2/4 text-xl text-zinc-400'>Supercharge your LLMs with diverse and bias-minimized synthetic data, unlocking their full potential for accurate and fair AI language processing</p>
+
+          <div className="flex flex-col gap-3 justify-center">
+            <Link href="/generator" className="w-fit">
+              <Button className="bg-prime hover:bg-purple-950">
+                Get Started
+              </Button>
+            </Link>
+            <Badge variant="outline" className="w-fit">{`It's Free`}</Badge>
+            <p className="text-xs italic text-zinc-400 my-2 font-bold"></p>
+          </div>
+        </div>
+        <div className="w-2/3 mb-20">
+          <DemoVideo />
+        </div>
       </div>
 
       <div className="flex flex-col">
