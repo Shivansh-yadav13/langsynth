@@ -59,7 +59,7 @@ export default function Navbar() {
             <h1 className="font-bold text-4xl my-auto">Lang<span className="text-prime">Synth</span></h1>
           </div>
         </Link>
-        <div className="flex gap-2 items-center">
+        <div className="gap-2 items-center hidden lg:block">
           <Link href="/generator">
             <Button variant="default" className="text-sm bg-prime hover:bg-purple-950">
               Generate Synthetic Data

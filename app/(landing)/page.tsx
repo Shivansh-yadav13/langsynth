@@ -9,7 +9,7 @@ const pfd = Playfair_Display({ subsets: ["latin"], style: ["italic"] });
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col gap-10 mt-32">
+    <div className="flex min-h-screen flex-col gap-10 mt-20 lg:mt-32">
       {/* <svg
         className="absolute inset-0 -top-24 -z-10 h-full w-full stroke-gray-500 [mask-image:radial-gradient(80%_40%_at_center,white,transparent)]"
         aria-hidden="true"
@@ -33,26 +33,26 @@ export default function Home() {
           fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
         ></rect>
       </svg> */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col 2xl:flex-row justify-between items-center">
         <div className="w-full flex flex-col gap-5">
-          <div className="flex flex-col gap-4 text-6xl text-left font-bold">
+          <div className="flex flex-col gap-4 text-5xl 2xl:text-6xl text-center 2xl:text-left font-bold">
             <h1>Generate High Quality</h1>
             <h1><span className="text-prime">Synthetic</span> Data</h1>
 
           </div>
-          <p className='text-wrap w-2/4 text-xl text-zinc-400'>Supercharge your LLMs with diverse and bias-minimized synthetic data, unlocking their full potential for accurate and fair AI language processing</p>
+          <p className='text-wrap 2xl:w-2/4 text-center mx-auto 2xl:mx-0 2xl:text-left 2xl:text-xl text-zinc-400'>Supercharge your LLMs with diverse and bias-minimized synthetic data, unlocking their full potential for accurate and fair AI language processing</p>
 
-          <div className="flex flex-col gap-3 justify-center">
+          <div className="flex flex-col mx-auto 2xl:mx-0 gap-3 justify-center">
             <Link href="/generator" className="w-fit">
               <Button className="bg-prime hover:bg-purple-950">
                 Get Started
               </Button>
             </Link>
-            <Badge variant="outline" className="w-fit">{`It's Free`}</Badge>
+            <Badge variant="outline" className="w-fit mx-auto 2xl:mx-0">{`It's Free`}</Badge>
             <p className="text-xs italic text-zinc-400 my-2 font-bold"></p>
           </div>
         </div>
-        <div className="w-2/3 mb-20">
+        <div className="mb-20">
           <DemoVideo />
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function Home() {
       <div className="flex flex-col">
         <div>
           <h2 className="text-xl text-muted-foreground text-center font-bold">Powered By</h2>
-          <div className="flex justify-evenly my-10">
+          <div className="flex flex-col gap-10 items-center lg:flex-row justify-evenly my-10">
             <Image
               src="/images/langchain.svg"
               width={300}
@@ -109,10 +109,10 @@ export default function Home() {
           </div>
         </div> */}
 
-        <div className="mt-32 flex justify-between gap-2">
+        <div className="2xl:mt-32 flex flex-col 2xl:flex-row justify-between gap-2">
           <div className="flex flex-col gap-5">
-            <h2 className="font-bold text-4xl">Why Synthetic Data?</h2>
-            <p className="text-zinc-400 text-xl">{`
+            <h2 className="font-bold text-2xl 2xl:text-4xl">Why Synthetic Data?</h2>
+            <p className="text-zinc-400 2xl:text-xl">{`
             Synthetic Data is important because it can help to train the model on a wide range of topics and styles of language. This can result in more versatile and creative language generation, as the model is not limited by the specific data it has been trained on. Synthetic data can also help to identify and correct errors in the model's output, as it can generate data that is similar to real-world data but with known errors or inaccuracies.
           `}</p>
             <p className="font-bold text-lg">{`Elon Musk & Jim Fan from NVIDIA has also shared about the importance of Synthetic Data.`}</p>
@@ -140,7 +140,7 @@ export default function Home() {
         </div> */}
       </div>
 
-      <div className="flex flex-col gap-2 text-center mt-32">
+      <div className="flex flex-col gap-2 text-center 2xl:mt-32">
         <h2 className="text-5xl font-bold mt-10">Get Started for Free</h2>
         <p className="text-zinc-400 text-center">Experince the power of Synthetic Data for Absolutely Free</p>
       </div>

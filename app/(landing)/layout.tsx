@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main>
-          <div className="mx-72">
+          <div className="mx-[10%]">
             <AuthContextProvider>
               <Navbar />
               {children}
