@@ -5,6 +5,7 @@ import Navbar from "@/components/common/Navbar";
 import { AuthContextProvider } from "@/app/contexts/authContext";
 import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/common/Footer";
+import { CSPostHogProvider } from '@/app/providers';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,18 +21,20 @@ export default function DashboardLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <main>
-          <div className="mx-72">
-            <AuthContextProvider>
-              <Navbar />
-              {children}
-              <Toaster />
-              <Footer />
-            </AuthContextProvider>
-          </div>
-        </main>
-      </body>
+      <CSPostHogProvider>
+        <body className={inter.className}>
+          <main>
+            <div className="mx-72">
+              <AuthContextProvider>
+                <Navbar />
+                {children}
+                <Toaster />
+                <Footer />
+              </AuthContextProvider>
+            </div>
+          </main>
+        </body>
+      </CSPostHogProvider>
     </html>
   );
 }
