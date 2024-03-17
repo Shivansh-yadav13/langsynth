@@ -6,6 +6,7 @@ import { AuthContextProvider } from "@/app/contexts/authContext";
 import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/common/Footer";
 import { CSPostHogProvider } from '@/app/providers';
+import dynamic from 'next/dynamic';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +14,10 @@ export const metadata: Metadata = {
   title: "LangSynth",
   description: "High Quality Synthetic Data for LLMs",
 };
+
+const PostHogPageView = dynamic(() => import('@/components/posthog/PostHogPageView'), {
+  ssr: false,
+})
 
 export default function DashboardLayout({
   children,
@@ -27,6 +32,7 @@ export default function DashboardLayout({
             <div className="mx-72">
               <AuthContextProvider>
                 <Navbar />
+                <PostHogPageView />
                 {children}
                 <Toaster />
                 <Footer />

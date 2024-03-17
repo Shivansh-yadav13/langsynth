@@ -5,6 +5,7 @@ import Navbar from "@/components/common/Navbar";
 import { AuthContextProvider } from "@/app/contexts/authContext";
 import Footer from "@/components/common/Footer";
 import { CSPostHogProvider } from '@/app/providers';
+import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,6 +13,10 @@ export const metadata: Metadata = {
   title: "LangSynth",
   description: "High Quality Synthetic Data for LLMs",
 };
+
+const PostHogPageView = dynamic(() => import('@/components/posthog/PostHogPageView'), {
+  ssr: false,
+})
 
 export default function BlogsLayout({
   children,
@@ -26,6 +31,7 @@ export default function BlogsLayout({
             <main className="flex-1">
               <AuthContextProvider>
                 <Navbar />
+                <PostHogPageView />
                 {children}
                 <Footer />
               </AuthContextProvider>
