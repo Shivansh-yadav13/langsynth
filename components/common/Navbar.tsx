@@ -53,40 +53,46 @@ export default function Navbar() {
   return (
     <nav className={`mt-5 ${username ? "" : "mb-32"} py-2 px-10`}>
       <div className="flex justify-between">
-        <Link href="/">
-          <div className="flex select-none">
-            <Image src="/images/logo.png" alt="logo" width={100} height={50} />
-            <h1 className="font-bold text-4xl my-auto">Lang<span className="text-prime">Synth</span></h1>
-          </div>
-        </Link>
-        <div className="gap-2 items-center hidden lg:block">
-          <Link href="/generator">
-            <Button variant="default" className="text-sm bg-prime hover:bg-purple-950">
-              Generate Synthetic Data
-            </Button>
+        <div className="flex items-center justify-between  gap-10">
+          <Link href="/">
+            <div className="flex items-center select-none">
+              <Image src="/images/logo.png" alt="logo" width={50} height={10} />
+              <h1 className="font-bold text-2xl my-auto">Lang<span className="text-prime">Synth</span></h1>
+            </div>
           </Link>
-          {
-            username &&
-            <DropdownMenu>
-              <DropdownMenuTrigger>
-                <div className="flex gap-2 items-center rounded px-2 py-1">
-                  <Avatar>
-                    <AvatarImage src="https://github.com/shadcn---.png" alt="profile-pic" />
-                    <AvatarFallback>{username[0].toUpperCase() ? username[0].toUpperCase() : "P"}</AvatarFallback>
-                  </Avatar>
-                  <p>{username}</p>
-                </div>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <Button variant="ghost" size="lg" className="text-center" onClick={handleLogout}>Logout</Button>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          }
+          <Link href="/blog" className="font-semibold hover:scale-105 transition-all text-lg">
+            {`Blogs ->`}
+          </Link>
 
+        </div>
+        <div className="gap-2 items-center hidden lg:block">
+          {
+            username ?
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <div className="flex gap-2 items-center rounded px-2 py-1">
+                    <Avatar>
+                      <AvatarImage src="https://github.com/shadcn---.png" alt="profile-pic" />
+                      <AvatarFallback>{username[0].toUpperCase() ? username[0].toUpperCase() : "P"}</AvatarFallback>
+                    </Avatar>
+                    <p>{username}</p>
+                  </div>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    <Button variant="ghost" size="lg" className="text-center" onClick={handleLogout}>Logout</Button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              :
+              <Link href="/generator">
+                <Button variant="default" className="text-sm bg-prime hover:bg-purple-950">
+                  Generate Synthetic Data
+                </Button>
+              </Link>
+          }
         </div>
       </div>
     </nav >
