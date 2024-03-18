@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner"
 import Footer from "@/components/common/Footer";
 import { CSPostHogProvider } from '@/app/providers';
 import dynamic from 'next/dynamic';
+import { GoogleAnalytics } from '@next/third-parties/google';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function DashboardLayout({
             </div>
           </main>
         </body>
+        <GoogleAnalytics gaId="G-ZD0G8950SS" />
       </CSPostHogProvider>
     </html>
   );
