@@ -1,0 +1,60 @@
+---
+title: What is RAG
+description: RAG stands for Retrieval Augmented Generation, this method is used in LLMs, we have covered about how it works and it's usage.
+date: 2024-03-19
+published: true
+---
+
+![RAG](/blog/rag.jpg)
+
+# Understanding Retrieval Augmented Generation (RAG)
+
+Retrieval augmented generation (RAG) is an architectural approach that enhances the effectiveness of large language models (LLMs) by incorporating custom data. By retrieving relevant data/documents and providing them as context for LLMs, RAG improves performance in applications such as support chatbots and Q&A systems, ensuring access to up-to-date and domain-specific knowledge.
+
+## Challenges Addressed by RAG
+
+1. **Limited Data Access:** LLMs trained on public datasets lack access to custom data beyond their training cutoff point, resulting in static behavior and potential inaccuracies.
+2. **Need for Custom Data:** Organizations require LLMs to provide domain-specific responses, necessitating access to proprietary data for accurate and relevant outputs.
+
+### Solution: Retrieval Augmentation
+
+RAG integrates custom data into LLM queries, augmenting model responses without the need for extensive retraining. By providing relevant context alongside prompts, RAG bridges the gap between static LLMs and real-time data.
+
+### Use Cases for RAG
+
+RAG finds applications in various scenarios, including:
+
+- Question and answer chatbots
+- Search augmentation
+- Knowledge engines for internal data queries (e.g., HR, compliance documents)
+
+## Benefits of RAG
+
+- **Up-to-Date Responses:** Ensures responses are based on current data, minimizing reliance on static training datasets.
+- **Reduced Inaccuracies:** Mitigates the risk of incorrect responses or hallucinations by grounding outputs in relevant external knowledge.
+- **Domain-Specific Relevance:** Tailors responses to organizational data, providing contextually appropriate answers.
+- **Efficiency and Cost-Effectiveness:** Simplifies customization without extensive model modifications, offering a practical solution for frequent data updates.
+
+## Choosing Between RAG and Fine-Tuning
+
+RAG serves as a starting point, offering simplicity and effectiveness for many use cases. Fine-tuning is recommended when significant behavioral changes or learning adaptations are required. Both approaches can complement each other to enhance model quality and relevance.
+
+## Options for Customizing LLMs
+
+Four architectural patterns are available for customizing LLM applications:
+
+1. **Prompt Engineering**
+2. **RAG**
+3. **Fine-Tuning**
+4. **Pretraining**
+
+## Reference Architecture for RAG Applications
+
+A typical RAG workflow involves:
+
+1. **Data Preparation:** Preprocess and chunk documents for use in RAG applications.
+2. **Indexing:** Create document embeddings and populate a Vector Search index for retrieval.
+3. **Data Retrieval:** Retrieve relevant data for user queries and provide it as context in prompts.
+4. **LLM Application Building:** Integrate prompt augmentation components and LLM querying into an endpoint for deployment.
+
+
